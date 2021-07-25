@@ -13,7 +13,7 @@ function App() {
   }
 
   const handleDelete = (indexToRemove) => {
-    setUserList( prev => [...prev].filter( (user, index) => index !== indexToRemove ))
+    setUserList( prev => prev.filter( (user, index) => index !== indexToRemove ))
   }
 
 
