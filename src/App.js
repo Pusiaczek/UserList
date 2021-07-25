@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import AddUserPanel from './AddUserPanel';
+import UserList from './UserList';
+
 import './App.css';
 
+
 function App() {
+  const [userList, setUserList] = useState([]);
+
+  const handleAddUser = (user) => {
+    setUserList( prev => [...prev, user]);
+  }
+
+  const handleDelete = (indexToRemove) => {
+    setUserList( prev => [...prev].filter( (user, index) => index !== indexToRemove ))
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>User's List</h1>
+      <AddUserPanel 
+        addUser={(user) => handleAddUser(user)} 
+      />
+      <UserList 
+        userListArr={userList} 
+        deleteItem={ (index) => handleDelete(index) }
+      />
     </div>
   );
 }
